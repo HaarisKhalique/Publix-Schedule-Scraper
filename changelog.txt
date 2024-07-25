@@ -1,3 +1,6 @@
 - 7/22/2024 - 
 Automated login process into Publix PASSPort using selenium and webdriver. Ready to begin scraping page for schedule information. 
 Current goal is to integrate with Apple Calendar for personal use. Google and Outlook calendars will follow.
+
+- 7/24/2024 -
+Added Day object to use for holding data scraped from schedule page. Cleaned up main() by defining functions

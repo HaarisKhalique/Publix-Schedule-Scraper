@@ -35,6 +35,15 @@ PASSWORD_FIELD = (By.ID, "i0118") #Locate password field
 AUTH_BUTTON = (By.XPATH, '//*[@id="idDiv_SAOTCS_Proofs"]/div[1]/div') #Locate MS Authenticator button to complete login
 
 
+#Day object to hold data for each work shift
+class Day:
+    def __init__(self, date, shift, meal):
+        self.date = date
+        self. shift = shift
+        self.meal = meal
+
+
+
 def main():
     #Prompt user for credentials on command line prior to automated login
     username = input("Enter your Publix PASSPort username: ")
@@ -58,10 +67,11 @@ def main():
     except Exception as e:
         print("An error occurred")
 
-
+'''
     #Halt after completion
     input("All done! Press enter to close the browser...")
     driver.quit()
+'''
 
 if __name__ == '__main__':
     main()
