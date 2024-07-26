@@ -16,7 +16,6 @@ TO DO LIST (1 = COMPLETE, 0 = INCOMPLETE)
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from getpass import getpass
@@ -39,16 +38,10 @@ AUTH_BUTTON = (By.XPATH, '//*[@id="idDiv_SAOTCS_Proofs"]/div[1]/div') #Locate MS
 class Day:
     def __init__(self, date, shift, meal):
         self.date = date
-        self. shift = shift
+        self.shift = shift
         self.meal = meal
 
-
-
-def main():
-    #Prompt user for credentials on command line prior to automated login
-    username = input("Enter your Publix PASSPort username: ")
-    password = getpass("Enter your Publix PASSPort password: ")
-
+def access_schedule(username, password):
     try:
         driver.get(WEBSITE)
 
@@ -66,6 +59,19 @@ def main():
 
     except Exception as e:
         print("An error occurred")
+
+
+#def scrape_schedule():
+    
+
+
+def main():
+    #Prompt user for credentials on command line prior to automated login
+    username = input("Enter your Publix PASSPort username: ")
+    password = getpass("Enter your Publix PASSPort password: ")
+
+    access_schedule(username, password)
+
 
 '''
     #Halt after completion
