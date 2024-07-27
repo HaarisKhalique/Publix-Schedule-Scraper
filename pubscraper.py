@@ -20,10 +20,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from getpass import getpass
 
+import time
+
 #Options to prevent browser from closing automatically during testing
-options = webdriver.EdgeOptions()
-options.add_experimental_option("detach",True)
-driver = webdriver.Edge(options = options)
+options = webdriver.FirefoxOptions()
+#options.add_experimental_option("detach",True)
+driver = webdriver.Firefox(options = options)
 
 #Constants
 WEBSITE = "https://www.publix.org/passport/scheduling/schedule" #URL to access schedule page
@@ -32,7 +34,7 @@ NEXT_BUTTON = (By.ID, "idSIButton9") #Locate "next" button to proceed after ente
 EMAIL_FIELD = (By.ID, "i0116") #Locate username field
 PASSWORD_FIELD = (By.ID, "i0118") #Locate password field
 AUTH_BUTTON = (By.XPATH, '//*[@id="idDiv_SAOTCS_Proofs"]/div[1]/div') #Locate MS Authenticator button to complete login
-
+NEXT_WEEK_BUTTON = (By.XPATH, "/html/body/main/div[3]/div[1]/div/div[1]/div[3]/a/i")
 
 #Day object to hold data for each work shift
 class Day:
@@ -41,6 +43,8 @@ class Day:
         self.shift = shift
         self.meal = meal
 
+
+#This function logs in to Publix PASSPort and accesses the schedule page
 def access_schedule(username, password):
     try:
         driver.get(WEBSITE)
@@ -57,13 +61,20 @@ def access_schedule(username, password):
         WebDriverWait(driver, 10).until(EC.element_to_be_clickable(NEXT_BUTTON)).click()
         WebDriverWait(driver, 10).until(EC.element_to_be_clickable(AUTH_BUTTON)).click()
 
-    except Exception as e:
-        print("An error occurred")
 
+        #Waits for elements to be present on page
+        while True:
+            if len(driver.find_elements(By.ID, "scheduledweek")) > 0:
+                break
+        time.sleep(1)
 
-#def scrape_schedule():
+        #Click button to display next week in schedule table    
+        driver.find_element(By.XPATH, NEXT_WEEK_BUTTON).click()
     
 
+    except Exception as e:
+        print("An error occurred.")
+        driver.close()
 
 def main():
     #Prompt user for credentials on command line prior to automated login
@@ -71,8 +82,7 @@ def main():
     password = getpass("Enter your Publix PASSPort password: ")
 
     access_schedule(username, password)
-
-
+    
 '''
     #Halt after completion
     input("All done! Press enter to close the browser...")

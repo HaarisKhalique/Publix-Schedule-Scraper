@@ -4,3 +4,7 @@ Current goal is to integrate with Apple Calendar for personal use. Google and Ou
 
 - 7/24/2024 -
 Added Day object to use for holding data scraped from schedule page. Cleaned up main() by defining functions
+
+- 7/27/2024 -
+Completed schedule access. Program now accesses most recent schedule data instead of staying on current week.
+Ready to begin scraping data from PASSPort.
