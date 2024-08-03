@@ -68,11 +68,13 @@ def access_schedule(username, password):
             if len(driver.find_elements(By.ID, "scheduledweek")) > 0:
                 break
         
-        time.sleep(30)
+        time.sleep(5)
         
         #Click button to display next week in schedule table    
         
-        driver.find_element(NEXT_WEEK_BUTTON).click()
+        button = driver.find_elements(By.XPATH, "//div[@id='scheduledweek']/div/div[3]/a/i")
+        
+        print("Found button")
         
         
       
