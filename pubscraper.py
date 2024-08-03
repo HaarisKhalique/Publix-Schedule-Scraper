@@ -57,7 +57,7 @@ def access_schedule(username, password):
         WebDriverWait(driver, 10).until(EC.element_to_be_clickable(EMAIL_FIELD)).send_keys(username)
         WebDriverWait(driver, 10).until(EC.element_to_be_clickable(NEXT_BUTTON)).click()
 
-        #Wait until password field is present, populate the field, and click next (now labeled "sign in" in browser) button to proceed to Two-Factor Authentication
+        #Wait until password field is present, populate the field, click next (now labeled "sign in" in browser) button, and select Microsoft Authenticator
         WebDriverWait(driver, 10).until(EC.element_to_be_clickable(PASSWORD_FIELD)).send_keys(password)
         WebDriverWait(driver, 10).until(EC.element_to_be_clickable(NEXT_BUTTON)).click()
         WebDriverWait(driver, 10).until(EC.element_to_be_clickable(AUTH_BUTTON)).click()
