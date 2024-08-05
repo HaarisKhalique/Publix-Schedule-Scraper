@@ -68,32 +68,37 @@ def access_schedule(username, password):
             if len(driver.find_elements(By.ID, "scheduledweek")) > 0:
                 break
         
-        time.sleep(5)
+        time.sleep(3)
         
         #Click button to display next week in schedule table    
-        
-        button = driver.find_elements(By.XPATH, "//div[@id='scheduledweek']/div/div[3]/a/i")
-        
-        print("Found button")
-        
-        
-      
+        button = driver.find_element(By.XPATH, "//div[@id='scheduledweek']/div/div[3]/a/i")
+        button.click()     
+
+        time.sleep(3)
+        schedule_page = driver.page_source
+        return schedule_page         
+    #end of try
 
     except Exception as e:
-        print("An error occurred.")
+        print("AN ERROR OCCURRED.")
         #driver.close()
 
-def scrape_schedule_data(html_page):
-    soup = BeautifulSoup(html_page, 'html.parser')
-    print(soup)
+def scrape_schedule_data(html_content):
+    soup = BeautifulSoup(html_content, 'html.parser')
+    main_content = soup.find('main')
+    
+    if main_content:
+        print(main_content.prettify)
+    else:
+        print ("Error finding <main>")
 
 def main():
     #Prompt user for credentials on command line prior to automated login
     username = input("Enter your Publix PASSPort username: ")
     password = getpass("Enter your Publix PASSPort password: ")
 
-    access_schedule(username, password)
-    #scrape_schedule_data(html_page)
+    html_content = access_schedule(username, password)
+    scrape_schedule_data(html_content)
     
 '''
     #Halt after completion
