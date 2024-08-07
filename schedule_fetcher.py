@@ -28,13 +28,6 @@ PASSWORD_FIELD = (By.ID, 'i0118') #Locate password field
 AUTH_BUTTON = (By.XPATH, '//*[@id="idDiv_SAOTCS_Proofs"]/div[1]/div') #Locate MS Authenticator button to complete login
 NEXT_WEEK_BUTTON = (By.XPATH, '/html/body/main/div[3]/div[1]/div/div[1]/div[3]/a/i')
 
-#Day object to hold data for each work shift
-class Day:
-    def __init__(self, date, shift, meal):
-        self.date = date
-        self.shift = shift
-        self.meal = meal
-
 
 #This function logs in to Publix PASSPort and accesses the schedule page
 def access_schedule(username, password):
