@@ -21,7 +21,7 @@ shifts = []     #stores scheduled shifts (start-end time)
 meals = []      #stores all scheduled meal breaks (start-end time)
 
 #in final, pass the html in from schedule_fetcher
-html_file = open('schedule.html', 'r', encoding= 'utf-8')
+html_file = open('schedule2.html', 'r', encoding= 'utf-8')
 
 try:
     #create soup from html file
@@ -41,12 +41,32 @@ try:
             date = td.find('span').find_next_sibling('span').text.strip()
             dates.append(date)
             
-    #retrieve scheduled shift and meal start-end times
-    shift_and_meal_divs = soup.find_all('div', class_='col-xs-6 shift p-0')
-    for div in shift_and_meal_divs:
-        print(div)
+    
+    shift_information = soup.find_all('div', class_='collapse col-xs-12 hidden-md hidden-lg')
+    
+    for div in shift_information:
+        #retrieve scheduled shift by finding div element
+        shift_time = div.find('div', class_='row').find('div', class_='col-xs-6 shift p-0')
+        if shift_time:
+            shifts.append(shift_time.text)
+        else:
+            continue
+        
+        #retrieve meal times, if any
+        meal_div = div.find('div', class_='col-xs-6 shift', string='Meal')
+        if meal_div: #check if a div for Meal exists, then check for sibling containing meal time
+            meal_time = meal_div.find_next_sibling('div', class_='col-xs-6 shift p-0')
+            
+            if meal_time: #append to meals array
+                meals.append(meal_time.text.strip())
+        
+        else: #if no meal is scheduled
+            meals.append('none')
+            
+    print(dates)
+    print(shifts)
+    print(meals)
 
-
-
+   
 finally:
     html_file.close()
