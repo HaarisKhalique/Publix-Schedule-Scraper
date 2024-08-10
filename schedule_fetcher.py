@@ -67,29 +67,13 @@ def access_schedule(username, password):
         print("AN ERROR OCCURRED.")
         #driver.close()
 
-'''This funciton will be its own module'''
-def scrape_schedule_data(html_content):
-    soup = BeautifulSoup(html_content, 'html.parser')
-    main_content = soup.find('main')
-    
-    if main_content:
-        print(main_content.prettify)
-    else:
-        print ("Error finding <main>")
-
 def main():
     #Prompt user for credentials on command line prior to automated login
     username = input("Enter your Publix PASSPort username: ")
     password = getpass("Enter your Publix PASSPort password: ")
 
     html_content = access_schedule(username, password)
-    scrape_schedule_data(html_content)
-    
-'''
-    #Halt after completion
-    input('All done! Press enter to close the browser...)
     driver.quit()
-'''
 
 if __name__ == '__main__':
     main()

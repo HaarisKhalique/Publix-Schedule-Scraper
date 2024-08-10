@@ -21,7 +21,7 @@ shifts = []     #stores scheduled shifts (start-end time)
 meals = []      #stores all scheduled meal breaks (start-end time)
 
 #in final, pass the html in from schedule_fetcher
-html_file = open('schedule2.html', 'r', encoding= 'utf-8')
+html_file = open('schedule.html', 'r', encoding= 'utf-8')
 
 try:
     #create soup from html file
