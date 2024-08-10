@@ -2,3 +2,6 @@
 credentials.json
 schedule.html
 schedule_without_meal.html
+token.json
+quickstart.py
+/.vs
