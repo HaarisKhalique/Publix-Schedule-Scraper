@@ -4,7 +4,9 @@ This module processes the schedule html to
 retrieve the desired information.
 
 '''
+import re
 from bs4 import BeautifulSoup
+
 
 
 #Day object to hold data for each work shift
@@ -28,8 +30,12 @@ try:
     html_content = html_file.read()
     soup = BeautifulSoup(html_content, 'html.parser')
     
-    '''use this to get the year somehow'''
-    #print(soup.find('div', class_='text-center week-header pt-1'))
+    #extract current year using schedule week string and regex
+    schedule_week = soup.find('div', class_='text-center week-header pt-1').text.strip()
+    match = re.search(r'\b\d{4}\b', schedule_week)
+    if match:
+        current_year = match.group()
+    
 
     #retrieve scheduled shift dates
     dates_td = soup.find_all('td', class_='col-md-2 pb-4 pt-3')
@@ -39,13 +45,12 @@ try:
             continue
         else:
             date = td.find('span').find_next_sibling('span').text.strip()
-            dates.append(date)
+            dates.append(f'{date}/{current_year}')
             
-    
+    #retrieve scheduled shift by finding div element
     shift_information = soup.find_all('div', class_='collapse col-xs-12 hidden-md hidden-lg')
-    
+
     for div in shift_information:
-        #retrieve scheduled shift by finding div element
         shift_time = div.find('div', class_='row').find('div', class_='col-xs-6 shift p-0')
         if shift_time:
             shifts.append(shift_time.text)
@@ -63,9 +68,7 @@ try:
         else: #if no meal is scheduled
             meals.append('none')
             
-    print(dates)
-    print(shifts)
-    print(meals)
+    print(f'Dates:\n{dates}\n\nShifts:\n{shifts}\n\nMeals:\n{meals}')
 
    
 finally:
