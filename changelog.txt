@@ -12,3 +12,7 @@ Ready to begin scraping data from PASSPort.
 - 8/5/2024 -
 Able to retrieve HTML source and print <main> HTML to terminal.
 Created new module to separate scraping from schedule retrieval and organize better.
+
+- 8/10/2024 -
+Successfully retrieved desired information from HTML file. Now must work on Google Calendar 
+connectivity (schedule_uploader.py) and properly format data from schedule_processor.py to send to calendar.
