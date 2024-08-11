@@ -35,6 +35,21 @@ def main():
     try:
         service = build('calendar', 'v3', credentials=creds)
 
+        event = {
+            'summary': 'Work',
+            'start': {
+                'dateTime': '2024-08-12T13:30:00-04:00',
+                'timeZone': 'America/New_York',
+            },
+            'end':{
+                'dateTime': '2024-08-12T22:15:00-04:00',
+                'timeZone': 'America/New_York',   
+            }
+        }
+
+        event = service.events().insert(calendarId='primary', body=event).execute()
+        print ('Event created in work calendar: %s' % (event.get('htmlLink')))
+
     except HttpError as error:
         print(f"An error occurred: {error}")
 
