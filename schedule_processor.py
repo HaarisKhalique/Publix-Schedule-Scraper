@@ -1,43 +1,38 @@
-#Publix Schedule Scraper by Haaris Khalique
+# Publix Schedule Scraper by Haaris Khalique
 '''
 This module processes the schedule html to 
 retrieve the desired information.
-
 '''
 import re
 from bs4 import BeautifulSoup
 
-
-
-#Day object to hold data for each work shift
+# Day object to hold data for each work shift
 class WorkDay:
     def __init__(self, date, shift, meal):
         self.date = date
         self.shift = shift
         self.meal = meal
 
+workdays    = [] # array of WorkDay objects to send to calendar app
+dates       = [] # stores all dates the employee is scheduled to work
+shifts      = [] # stores scheduled shifts (start-end time)
+meals       = [] # stores all scheduled meal breaks (start-end time)
 
-workdays = []   #array of WorkDay objects to send to calendar app
-dates = []      #stores all dates the employee is scheduled to work
-shifts = []     #stores scheduled shifts (start-end time)
-meals = []      #stores all scheduled meal breaks (start-end time)
-
-#in final, pass the html in from schedule_fetcher
+# in final, pass the html in from schedule_fetcher
 html_file = open('schedule.html', 'r', encoding= 'utf-8')
 
 try:
-    #create soup from html file
+    # create soup from html file
     html_content = html_file.read()
     soup = BeautifulSoup(html_content, 'html.parser')
     
-    #extract current year using schedule week string and regex
+    # extract current year using schedule week string and regex
     schedule_week = soup.find('div', class_='text-center week-header pt-1').text.strip()
     match = re.search(r'\b\d{4}\b', schedule_week)
     if match:
         current_year = match.group()
     
-
-    #retrieve scheduled shift dates
+    # retrieve scheduled shift dates
     dates_td = soup.find_all('td', class_='col-md-2 pb-4 pt-3')
     for td in dates_td:
         td_sibling = td.find_next_sibling('td', class_='col-md-12')
@@ -47,7 +42,7 @@ try:
             date = td.find('span').find_next_sibling('span').text.strip()
             dates.append(f'{date}/{current_year}')
             
-    #retrieve scheduled shift by finding div element
+    # retrieve scheduled shift by finding div element
     shift_information = soup.find_all('div', class_='collapse col-xs-12 hidden-md hidden-lg')
 
     for div in shift_information:
@@ -57,19 +52,18 @@ try:
         else:
             continue
         
-        #retrieve meal times, if any
+        # retrieve meal times, if any
         meal_div = div.find('div', class_='col-xs-6 shift', string='Meal')
-        if meal_div: #check if a div for Meal exists, then check for sibling containing meal time
+        if meal_div: # check if a div for Meal exists, then check for sibling containing meal time
             meal_time = meal_div.find_next_sibling('div', class_='col-xs-6 shift p-0')
             
-            if meal_time: #append to meals array
+            if meal_time: # append to meals array
                 meals.append(meal_time.text.strip())
         
-        else: #if no meal is scheduled
+        else: # if no meal is scheduled
             meals.append('none')
             
     print(f'Dates:\n{dates}\n\nShifts:\n{shifts}\n\nMeals:\n{meals}')
 
-   
 finally:
     html_file.close()
