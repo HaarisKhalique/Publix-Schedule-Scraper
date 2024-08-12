@@ -8,7 +8,7 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 
 
-# Day object to hold data for each work shift
+# object to hold data for each work shift
 class WorkDay:
     def __init__(self, start, end, meal_start, meal_end):
         self.start = start
@@ -18,7 +18,7 @@ class WorkDay:
 
 
 # This function combines each shift date and time
-# into ISO format for Google Calendar compatibility.
+# into ISO format for Google Calendar.
 def format_time(date, time_range):
     date = datetime.strptime(date, '%m/%d/%Y')
 

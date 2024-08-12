@@ -4,6 +4,7 @@ This module creates events in Google Calendar
 '''
 import datetime
 import os.path
+import constants
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -11,22 +12,20 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-# If modifying these scopes, delete the file token.json.
-SCOPES = ["https://www.googleapis.com/auth/calendar"]
 
-def main():
+def update_calendar(workdays):
     # The following code was taken from Google's quickstart.py file to authenticate a user
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first time.
     if os.path.exists('token.json'):
-        creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+        creds = Credentials.from_authorized_user_file('token.json', constants.SCOPES)
     
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
+            flow = InstalledAppFlow.from_client_secrets_file('credentials.json', constants.SCOPES)
             creds = flow.run_local_server(port = 0)
             #Save credentials for next run
             with open('token.json', 'w') as token:
@@ -36,23 +35,34 @@ def main():
     try:
         service = build('calendar', 'v3', credentials=creds)
 
-        shift = {
-            'summary': 'Work',
-            'start': {
-                'dateTime': '2024-08-12T13:30:00-04:00',
-                'timeZone': 'America/New_York',
-            },
-            'end':{
-                'dateTime': '2024-08-12T22:15:00-04:00',
-                'timeZone': 'America/New_York',   
+        for day in workdays:
+            shift = {
+                'summary': 'Work',
+                'start': {
+                    'dateTime': day.start,
+                    'timeZone': 'America/New_York',
+                },
+                'end':{
+                    'dateTime': day.end,
+                    'timeZone': 'America/New_York',   
+                }
             }
-        }
 
-        shift = service.events().insert(calendarId='primary', body=shift).execute()
-        print ('Event created in work calendar: %s' % (shift.get('htmlLink')))
+            if(day.meal_start is not None):
+                meal = {
+                    'summary': 'Break',
+                'start': {
+                    'dateTime': day.meal_start,
+                    'timeZone': 'America/New_York',
+                },
+                'end':{
+                    'dateTime': day.meal_end,
+                    'timeZone': 'America/New_York',   
+                }
+                }
+            shift = service.events().insert(calendarId= 'primary', body = shift).execute()
+            meal = service.events().insert(calendarId= 'primary', body = meal).execute()
+        print ('Shifts have been added to your calendar: %s' % (shift.get('htmlLink')))
 
     except HttpError as error:
         print(f"An error occurred: {error}")
-
-if __name__ == "__main__":
-  main()

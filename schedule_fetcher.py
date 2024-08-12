@@ -10,25 +10,24 @@ from selenium.webdriver.support import expected_conditions as EC
 from getpass import getpass
 
 import time
-import webconstants # xpaths, class id, identifiers for buttons on web page
-
+import constants
 # This function logs in to Publix PASSPort and accesses the schedule page
 def access_schedule(username, password):
     try:
         driver = webdriver.Firefox()
-        driver.get(webconstants.WEBSITE)
+        driver.get(constants.WEBSITE)
 
         # Wait until login button is clickable and click to begin login process
-        WebDriverWait(driver, 10).until(EC.element_to_be_clickable(webconstants.LOGIN_BUTTON)).click()
+        WebDriverWait(driver, 10).until(EC.element_to_be_clickable(constants.LOGIN_BUTTON)).click()
 
         # Wait until username field is present, populate the field, and click "next" button to proceed to password entry
-        WebDriverWait(driver, 10).until(EC.element_to_be_clickable(webconstants.EMAIL_FIELD)).send_keys(username)
-        WebDriverWait(driver, 10).until(EC.element_to_be_clickable(webconstants.NEXT_BUTTON)).click()
+        WebDriverWait(driver, 10).until(EC.element_to_be_clickable(constants.EMAIL_FIELD)).send_keys(username)
+        WebDriverWait(driver, 10).until(EC.element_to_be_clickable(constants.NEXT_BUTTON)).click()
 
         # Wait until password field is present, populate the field, click next (now labeled "sign in" in browser) button, and select Microsoft Authenticator
-        WebDriverWait(driver, 10).until(EC.element_to_be_clickable(webconstants.PASSWORD_FIELD)).send_keys(password)
-        WebDriverWait(driver, 10).until(EC.element_to_be_clickable(webconstants.NEXT_BUTTON)).click()
-        WebDriverWait(driver, 10).until(EC.element_to_be_clickable(webconstants.AUTH_BUTTON)).click()
+        WebDriverWait(driver, 10).until(EC.element_to_be_clickable(constants.PASSWORD_FIELD)).send_keys(password)
+        WebDriverWait(driver, 10).until(EC.element_to_be_clickable(constants.NEXT_BUTTON)).click()
+        WebDriverWait(driver, 10).until(EC.element_to_be_clickable(constants.AUTH_BUTTON)).click()
 
 
         # Waits for elements to be present on page
