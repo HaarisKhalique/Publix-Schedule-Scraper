@@ -23,3 +23,9 @@ Successfully used Google Calendar API to create hard-coded events in calendar. V
 Created WorkDay objects to send to schedule_uploader from schedule_processor by properly formatting date/time
 Each component works as desired in isolation. 
 Next steps are to make the modules work together.
+
+End of day: 
+ Created main.py to orchestrate functionality across the three files. Removed main() from the schedule_.py
+ files and used main.py to call pertinent functions. Web automation, schedule retrieval, and schedule processing verified
+ working. Now just need to include schedule_uploader which should be trivial. Expect to complete 8/12/2024.
+ Cleaned up some code.
