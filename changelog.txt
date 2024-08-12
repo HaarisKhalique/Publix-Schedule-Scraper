@@ -16,3 +16,10 @@ Created new module to separate scraping from schedule retrieval and organize bet
 - 8/10/2024 -
 Successfully retrieved desired information from HTML file. Now must work on Google Calendar 
 connectivity (schedule_uploader.py) and properly format data from schedule_processor.py to send to calendar.
+
+
+- 8/11/2024 -
+Successfully used Google Calendar API to create hard-coded events in calendar. Verified connectivity and function.
+Created WorkDay objects to send to schedule_uploader from schedule_processor by properly formatting date/time
+Each component works as desired in isolation. 
+Next steps are to make the modules work together.

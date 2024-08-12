@@ -32,10 +32,11 @@ def main():
             with open('token.json', 'w') as token:
                 token.write(creds.to_json())
 
+    # Create an event in primary
     try:
         service = build('calendar', 'v3', credentials=creds)
 
-        event = {
+        shift = {
             'summary': 'Work',
             'start': {
                 'dateTime': '2024-08-12T13:30:00-04:00',
@@ -47,8 +48,8 @@ def main():
             }
         }
 
-        event = service.events().insert(calendarId='primary', body=event).execute()
-        print ('Event created in work calendar: %s' % (event.get('htmlLink')))
+        shift = service.events().insert(calendarId='primary', body=shift).execute()
+        print ('Event created in work calendar: %s' % (shift.get('htmlLink')))
 
     except HttpError as error:
         print(f"An error occurred: {error}")
