@@ -1,3 +1,4 @@
+from selenium.webdriver.common.by import By
 WEBSITE = "https://www.publix.org/passport/scheduling/schedule" # URL to access schedule page
 LOGIN_BUTTON = (By.XPATH, '/html/body/main/div[3]/div/div/form/button') # Locate login button to begin login process
 NEXT_BUTTON = (By.ID, 'idSIButton9') # Locate "next" button to proceed after entering username and password.

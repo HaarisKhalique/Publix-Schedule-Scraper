@@ -53,13 +53,3 @@ def access_schedule(username, password):
     except Exception as e:
         print("AN ERROR OCCURRED.")
         driver.quit()
-
-def main():
-    # Prompt user for credentials on command line prior to automated login
-    username = input("Enter your Publix PASSPort username: ")
-    password = getpass("Enter your Publix PASSPort password: ")
-
-    html_content = access_schedule(username, password)
-
-if __name__ == '__main__':
-    main()

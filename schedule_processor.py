@@ -7,6 +7,7 @@ import re
 from datetime import datetime
 from bs4 import BeautifulSoup
 
+
 # Day object to hold data for each work shift
 class WorkDay:
     def __init__(self, start, end, meal_start, meal_end):
@@ -15,12 +16,9 @@ class WorkDay:
         self.meal_start = meal_start
         self.meal_end = meal_end
 
-workdays = []   # array of WorkDay objects to send to calendar
-dates = []      # stores all dates the employee is scheduled to work
-shifts = []     # stores scheduled shifts (start-end time)
-meals = []      # stores all scheduled meal breaks (start-end time)
 
-
+# This function combines each shift date and time
+# into ISO format for Google Calendar compatibility.
 def format_time(date, time_range):
     date = datetime.strptime(date, '%m/%d/%Y')
 
@@ -46,18 +44,16 @@ def format_time(date, time_range):
         iso_end = datetime_end.strftime('%Y-%m-%dT%H:%M:%S')
         
         return iso_start, iso_end
-# ////// end of format_time //////////
+# end of format_time
 
 
-def create_workdays(dates, shifts, meals):
-    for i in range(0, len(dates)):
-        shift_start, shift_end = format_time(dates[i], shifts[i])
-        meal_start, meal_end = format_time(dates[i], meals[i])
-        workdays.append(WorkDay(shift_start,shift_end,meal_start,meal_end))
-# ////// end of create_workdays //////////
-
-
+# This function processes the HTML text using BeautifulSoup4 and retrieves shift dates and times
+# Shift information is used to create WorkDay objects which will be sent to calendar as events
 def process_html(html_content):
+    
+    # arrays to store data from HTML
+    dates, shifts, meals, workdays = [], [], [], []
+
     # create soup from html
     soup = BeautifulSoup(html_content, 'html.parser')
         
@@ -96,5 +92,10 @@ def process_html(html_content):
         else: # if no meal is scheduled
                 meals.append(None)
 
-    return create_workdays(dates,shifts,meals)
-# ////// end of proccess_html //////////
+    # create WorkDay objects, store in workdays
+    for i in range(0, len(dates)):
+        shift_start, shift_end = format_time(dates[i], shifts[i])
+        meal_start, meal_end = format_time(dates[i], meals[i])
+        workdays.append(WorkDay(shift_start,shift_end,meal_start,meal_end))
+
+    return workdays
