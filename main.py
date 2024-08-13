@@ -11,7 +11,6 @@ def main():
     html_content = access_schedule(username, password)
     events = process_html(html_content)
     update_calendar(events)
- 
-
+    exit()
 if __name__ == '__main__':
     main()

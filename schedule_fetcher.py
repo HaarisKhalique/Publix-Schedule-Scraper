@@ -14,7 +14,7 @@ import constants
 # This function logs in to Publix PASSPort and accesses the schedule page
 def access_schedule(username, password):
     try:
-        driver = webdriver.Firefox()
+        driver = webdriver.Edge()
         driver.get(constants.WEBSITE)
 
         # Wait until login button is clickable and click to begin login process
@@ -35,20 +35,19 @@ def access_schedule(username, password):
             if len(driver.find_elements(By.ID, "scheduledweek")) > 0:
                 break
         
-        time.sleep(3)
+        time.sleep(2)
         
-        # Click button to display next week in schedule table    
-        button = driver.find_element(By.XPATH, "//div[@id='scheduledweek']/div/div[3]/a/i")
-        button.click()     
-
+        # Click button to display latest week in schedule table    
+        driver.find_element(By.XPATH, "//div[@id='scheduledweek']/div/div[3]/a/i").click()
+        time.sleep(2)
+        driver.find_element(By.XPATH, "//div[@id='scheduledweek']/div/div[3]/a/i").click()
         time.sleep(3)
 
         schedule_page = driver.page_source
-        
         driver.quit()
+        
         return schedule_page         
     # end of try
 
     except Exception as e:
         print("AN ERROR OCCURRED.")
-        driver.quit()

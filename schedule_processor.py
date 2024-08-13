@@ -72,7 +72,7 @@ def process_html(html_content):
         else:
             date = td.find('span').find_next_sibling('span').text.strip().replace('.','')
             dates.append(f'{date}/{current_year}')
-                
+             
     # retrieve scheduled shift by finding div element
     shift_information = soup.find_all('div', class_='collapse col-xs-12 hidden-md hidden-lg')
     for div in shift_information:
