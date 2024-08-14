@@ -45,18 +45,18 @@ After you have configured your Google Cloud environment and have your **credenti
 
 
 ### Method 1: Automated Schedule Retrieval using Selenium
-**1. Execute the program by issuing the following command:**
+#### 1. Execute the program by issuing the following command:
 ```
 python main_auto.py
 ```
 
-**2. Type in your PASSPort username:**
+#### 2. Type in your PASSPort username:
 
 ![user-prompt](images/username-prompt.png)
 
 Press **ENTER**.
 
-**3. Enter your PASSPort password:**
+#### 3. Enter your PASSPort password:
 
 ![user-prompt](images/userpass-prompt.png)
 
@@ -65,33 +65,35 @@ Press **ENTER**.
 
 Selenium will then automate the login process by opening a browser instance and passing the credentials you provided to Publix PASSPort.
 
-**4. Complete Two-Factor Authentication using the Microsoft Authenticator.**
+#### 4. Complete Two-Factor Authentication using the Microsoft Authenticator.
+
 If you have not set up 2FA with your PASSPort account, set it up for use with Microsoft Authenticator.
 Selenium will then navigate to the latest schedule, obtain the HTML source, and close the browser.
 
-**5. Authorize the program to view, modify, and create events** 
+#### 5. Authorize the program to view, modify, and create events
+
 Upon first access to your Google Calendar, you will be asked if you trust the program to edit your calendar. Verify that the **credentials.json** you downloaded is from the Cloud project you created and authorize the program to modify your calendars.
 
 A **token.json** file will be created in your working directory which will allow you to skip the previous trust/authorize step in the future. **KEEP THIS FILE SECURE** as it is your personal access token to your calendar.
 
-**6. Check your calendar to see your new events!**
+**Check your calendar to see your new events!**
 
 
 ### Method 2: Manual Schedule Retrieval
 This method presents a simpler approach and is suited for those who want Google Calendar integration, but want to automate the login process.
 
-**1. Log in to Publix PASSPort and access the schedule week you wish to add to your calendar.**
+#### 1. Log in to Publix PASSPort and access the schedule week you wish to add to your calendar.**
 
-**2. Download the HTML source by right-clicking anywhere on the page and clicking "Save Page As..." :**
+#### 2. Download the HTML source by right-clicking anywhere on the page and clicking "Save Page As..." :**
 ![save-html](images/save-html.png)
 
-**3. Rename the file to something easy to remember and save in the project directory.**
+#### 3. Rename the file to something easy to remember and save in the project directory.**
 
-**4. In terminal, navigate to the project directory and issue the following command:**
+#### 4. In terminal, navigate to the project directory and issue the following command:
 ```
 python main_filedirect.py
 ```
-**5. You will be prompted to enter your HTML file name with file extension (verify whether your file extension is **.htm** or **.html**).**
+#### 5. You will be prompted to enter your HTML file name with file extension (verify whether your file extension is **.htm** or **.html**).
 ![enter-file](images/enter-file-prompt.png)
 
 Press **ENTER**. 
@@ -105,11 +107,11 @@ ___
 ## Creating an Executable File
 For greater simplicity, you may wish to create an executable file to run the program. You will simply create an executable and keep your **credentials.json** within the same directory.
 
-**1. Install pyinstaller:**
+#### 1. Install pyinstaller:
 ```
 pip install pyinstaller
 ```
-**2. Create an executable file:**
+#### 2. Create an executable file:
 ```
 pyinstaller --onefile main_auto.py
 ```
@@ -117,7 +119,7 @@ or
 ```
 pyinstaller --onefile main_filedirect.py
 ```
-**3. Move the executable file to your desired location.**
+#### 3. Move the executable file to your desired location.
 
 ![exe-directory](images/exe-directory.png)
 
