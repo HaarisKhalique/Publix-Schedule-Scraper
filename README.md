@@ -82,12 +82,12 @@ ___
 ### Method 2: Manual Schedule Retrieval
 This method presents a simpler approach and is suited for those who want Google Calendar integration, but want to automate the login process.
 
-#### 1. Log in to Publix PASSPort and access the schedule week you wish to add to your calendar.**
+#### 1. Log in to Publix PASSPort and access the schedule week you wish to add to your calendar.
 
-#### 2. Download the HTML source by right-clicking anywhere on the page and clicking "Save Page As..." :**
+#### 2. Download the HTML source by right-clicking anywhere on the page and clicking "Save Page As..." :
 ![save-html](images/save-html.png)
 
-#### 3. Rename the file to something easy to remember and save in the project directory.**
+#### 3. Rename the file to something easy to remember and save in the project directory.
 
 #### 4. In terminal, navigate to the project directory and issue the following command:
 ```
