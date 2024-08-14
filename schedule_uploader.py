@@ -50,7 +50,8 @@ def update_calendar(workdays):
                         'timeZone': 'America/New_York',   
                     }
                 }
-
+                shift = service.events().insert(calendarId= 'primary', body = shift).execute()
+                
                 if(day.meal_start is not None):
                     meal = {
                         'summary': 'Break',
@@ -63,8 +64,9 @@ def update_calendar(workdays):
                         'timeZone': 'America/New_York',   
                     }
                     }
-                shift = service.events().insert(calendarId= 'primary', body = shift).execute()
-                meal = service.events().insert(calendarId= 'primary', body = meal).execute()
+                    meal = service.events().insert(calendarId= 'primary', body = meal).execute()
+                
+                
             print ('Shifts have been added to your calendar: %s' % (shift.get('htmlLink')))
 
         except HttpError as error:
