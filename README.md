@@ -1,6 +1,6 @@
 # Publix PASSPort Calendar Tool
 ## by Haaris Khalique
-___
+
 
 This Python program retrieves your most recent schedule data from Publix PASSPort's schedule page and creates corresponding events in your Google Calendar. 
 
