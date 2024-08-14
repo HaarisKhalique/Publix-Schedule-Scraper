@@ -14,7 +14,12 @@ import constants
 # This function logs in to Publix PASSPort and accesses the schedule page
 def access_schedule(username, password):
     try:
+        # You may choose to use Firefox or Chrome below, instead.
         driver = webdriver.Edge()
+        #driver = webdriver.Firefox()
+        #driver = webdriver.Chrome()
+
+        #Request webpage containing schedule
         driver.get(constants.WEBSITE)
 
         # Wait until login button is clickable and click to begin login process
