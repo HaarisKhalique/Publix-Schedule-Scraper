@@ -1,4 +1,4 @@
-# Publix PASSPort Calendar Tool
+# Publix PASSPort Google Calendar Integration
 ## by Haaris Khalique
 
 
