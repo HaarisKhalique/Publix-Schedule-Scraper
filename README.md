@@ -12,11 +12,11 @@ To ensure compatibility, please make sure you have Python 3.12 installed.
 
 Currently, only Windows instructions are provided. The browser used by the program is Microsoft Edge. You may choose to use Firefox or  Chrome by modifying **schedule_fetcher.py** (lines 18-20) to select your browser of choice.
 
-**1. Clone the repository to your machine:**
+#### 1. Clone the repository to your machine:
 ```
 git clone https://github.com/HaarisKhalique/PublixPASSPort-Calendar-Integration.git
 ```
-**2. Create a virtual environment:** 
+#### 2. Create a virtual environment:
 Isolate this program's packages from other projects on your machine. See [official Python documentation](https://docs.python.org/3/library/venv.html) for more on virtual environments.
 
 
@@ -29,12 +29,12 @@ Activate the environment:
 C:\> <venv>\Scripts\activate.bat
 ```
 
-**3. Install required packages:**
+#### 3. Install required packages:
 ```
 pip install requirements.txt
 ```
  
-**4. Set up Google Cloud environment**
+#### 4. Set up Google Cloud environment
 To call the Google Calendar API, you will need credentials authorizing the program to access the requested service. **See the [Google Calendar API quickstart documentation](https://developers.google.com/calendar/api/quickstart/python#set-up-environment) and refer to the "Set up your environment" section to guide you.**
 
 ___
