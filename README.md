@@ -134,3 +134,5 @@ ___
 This program was developed as a personal side project to explore Python, web automation, data scraping, and leveraging an existing API to create a feature that I have long desired. I intend to continue refining and updating the project as it is still a WIP.
 
 While I am employed by Publix, this project was not developed as part of my role there, nor is it endorsed by or affiliated with Publix in any official capacity. This project is for personal and educational purposes only, and no profit is being made from it.
+
+Google Calendar is a trademark of Google Inc. Use of this trademark is subject to Google Permissions.
