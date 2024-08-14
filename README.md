@@ -1,4 +1,4 @@
-# Publix PASSPort Google Calendar Integration
+# Publix PASSPort Google Calendar™ Integration
 ## by Haaris Khalique
 
 
@@ -73,7 +73,7 @@ Selenium will then automate the login process by opening a browser instance and 
 #### 4. Complete Two-Factor Authentication using the Microsoft Authenticator.
 
 If you have not set up 2FA with your PASSPort account, set it up for use with Microsoft Authenticator.
-Selenium will then navigate to the latest schedule, obtain the HTML source, and close the browser.
+Selenium will then navigate to the latest schedule, obtain the HTML source, and close the browser automatically.
 
 #### 5. Authorize the program to view, modify, and create events
 
@@ -85,7 +85,7 @@ A **token.json** file will be created in your working directory which will allow
 
 ___
 ### Method 2: Manual Schedule Retrieval
-This method presents a simpler approach and is suited for those who want Google Calendar integration, but want to automate the login process.
+This method presents a simpler approach and is suited for those who want Google Calendar integration, but do not want to automate the login process.
 
 #### 1. Log in to Publix PASSPort and access the schedule week you wish to add to your calendar.
 
@@ -134,3 +134,5 @@ ___
 This program was developed as a personal side project to explore Python, web automation, data scraping, and leveraging an existing API to create a feature that I have long desired. I intend to continue refining and updating the project as it is still a WIP.
 
 While I am employed by Publix, this project was not developed as part of my role there, nor is it endorsed by or affiliated with Publix in any official capacity. This project is for personal and educational purposes only, and no profit is being made from it.
+
+Google Calendar is a trademark of Google Inc. Use of this trademark is subject to Google Permissions.
