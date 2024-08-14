@@ -51,11 +51,15 @@ python main_auto.py
 ```
 
 **2. Type in your PASSPort username:**
+
 ![user-prompt](images/username-prompt.png)
+
 Press **ENTER**.
 
 **3. Enter your PASSPort password:**
+
 ![user-prompt](images/userpass-prompt.png)
+
 No characters are displayed in the terminal while inputting your password.
 Press **ENTER**.
 
@@ -89,10 +93,13 @@ python main_filedirect.py
 ```
 **5. You will be prompted to enter your HTML file name with file extension (verify whether your file extension is **.htm** or **.html**).**
 ![enter-file](images/enter-file-prompt.png)
+
 Press **ENTER**. 
+
 The program continues from here as normal. The HTML will be processed for schedule information and events will be created in your Google Calendar!
 
 **Note:** With either method, if there is no schedule data present in the HTML, no attempt will be made to access your Google Calendar and you will see this message:
+
 ![no-schedule](images/no-schedule-message.png)
 ___
 ## Creating an Executable File
@@ -111,7 +118,9 @@ or
 pyinstaller --onefile main_filedirect.py
 ```
 **3. Move the executable file to your desired location.**
+
 ![exe-directory](images/exe-directory.png)
+
 Place **credentials.json** in the same folder. Your **token.json** will be created here after your first execution.
 ___
 ## Developer's Note
