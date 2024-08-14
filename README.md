@@ -36,7 +36,7 @@ C:\> <venv>\Scripts\activate.bat
 
 #### 3. Install required packages:
 ```
-pip install requirements.txt
+pip install -r requirements.txt
 ```
  
 #### 4. Set up Google Cloud environment
