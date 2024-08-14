@@ -44,9 +44,9 @@ To call the Google Calendar API, you will need credentials authorizing the progr
 
 ___
 ## Usage
-After you have configured your Google Cloud environment and have your **credentials.json** file in the project directory, you are ready to execute the program. There are two files:
-- **main_auto.py** - This file will run the web automation procedure using Selenium to pas your login to Publix PASSPort and retrieve the latest schedule.
-- **main_filedirect.py** - This file does not automate login. You will download the HTML source manually and provide the file directly for processing. It is useful if you wish to access past schedule data to add to your calendar.
+After you have configured your Google Cloud environment and have your **credentials.json** file in the project directory, you are ready to execute the program. There are two ways to execute:
+- **main_auto.py** - This file will run the web automation procedure using Selenium to pass your login to Publix PASSPort and retrieve the latest schedule.
+- **main_filedirect.py** - This file does not automate login. You will instead login and download the HTML source manually to provide the file directly for processing. It is useful if you wish to access past schedule data to add to your calendar.
 
 
 ### Method 1: Automated Schedule Retrieval using Selenium
