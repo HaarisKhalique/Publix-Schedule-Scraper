@@ -78,7 +78,7 @@ A **token.json** file will be created in your working directory which will allow
 
 **Check your calendar to see your new events!**
 
-
+___
 ### Method 2: Manual Schedule Retrieval
 This method presents a simpler approach and is suited for those who want Google Calendar integration, but want to automate the login process.
 
