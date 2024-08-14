@@ -8,9 +8,14 @@ Selenium automates the login process and BeautifulSoup processes the HTML to scr
 
 ## Installation
 This program was written with Python 3.12.3
+
 To ensure compatibility, please make sure you have Python 3.12 installed.
 
-Currently, only Windows instructions are provided. The browser used by the program is Microsoft Edge. You may choose to use Firefox or  Chrome by modifying **schedule_fetcher.py** (lines 18-20) to select your browser of choice.
+Currently, only Windows instructions are provided. 
+
+The browser used by the program is Microsoft Edge. You may choose to use Firefox or  Chrome by modifying **schedule_fetcher.py** (lines 18-20) to select your browser of choice.
+
+### To install:
 
 #### 1. Clone the repository to your machine:
 ```
