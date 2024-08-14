@@ -49,7 +49,7 @@ After you have configured your Google Cloud environment and have your **credenti
 - **main_filedirect.py** - This file does not automate login. You will instead login and download the HTML source manually to provide the file directly for processing. It is useful if you wish to access past schedule data to add to your calendar.
 
 
-### Method 1: Automated Schedule Retrieval using Selenium
+### Method 1: Automated Schedule Retrieval
 #### 1. Execute the program by issuing the following command:
 ```
 python main_auto.py
