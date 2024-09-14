@@ -37,15 +37,15 @@ def access_schedule(username, password):
 
         # Waits for elements to be present on page
         while True:
-            if len(driver.find_elements(By.ID, "scheduledweek")) > 0:
+            if len(driver.find_elements(By.CSS_SELECTOR, '#futureWeekButton')) > 0:
                 break
         
         time.sleep(2)
         
         # Click button to display latest week in schedule table    
-        driver.find_element(By.XPATH, "//div[@id='scheduledweek']/div/div[3]/a/i").click()
+        driver.find_element(By.CSS_SELECTOR, '#futureWeekButton').click()
         time.sleep(2)
-        driver.find_element(By.XPATH, "//div[@id='scheduledweek']/div/div[3]/a/i").click()
+        driver.find_element(By.CSS_SELECTOR, '#futureWeekButton').click()
         time.sleep(3)
 
         schedule_page = driver.page_source
