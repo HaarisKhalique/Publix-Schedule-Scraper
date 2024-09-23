@@ -83,18 +83,35 @@ def process_html(html_content):
 
     #Obtain shift data for dates scheduled to work. Exclude elements where employee is not scheduled.
     days = schedule.find_all('div', class_= 'pb-3') 
-    scheduled_days = [day for day in days if not day.find('div', class_= 'calendar-day-of-month-number-not-scheduled')]
+    scheduled_days = [day for day in days if  day.find('div', class_= 'calendar-day-of-month-number')]
 
     for day in scheduled_days:
-        print(day)
+        # Find days employee is schedule
+        day_number = day.find('div', class_= 'calendar-day-of-month-number').text.strip()
+        if (day_number < current_day):
+            current_month += 1
+            if(current_month > 12):
+                current_year +=1
+        dates.append(f'{current_month}/{day_number}/{current_year}')
 
-        # Obtain day number
-        # If new day is < current: 
-            # increment month +1
-            # append month, day, year
+        # Find shift times
+        shift = day.find('div', class_= 'col-xs-10')
+        shift_time = shift.find_next('div', text= lambda x: x and '-' in x)
+        shifts.append(shift_time.text.strip())
 
-        # Else (if >):
-            # append month, day, year
+        # Find meal times
+        meal = shift.find_next('div', class_='pt-3')
+        if(meal):
+            meal_div = meal.find('div', class_= 'pb-3')
+            meal_time = meal_div.find('div', text=lambda x: x and '-' in x)
+            meals.append(meal_time.text.strip())
+
+
+
+    print(dates)
+    print(shifts)
+    print(meals)
+        
     
     
     '''    
