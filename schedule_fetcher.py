@@ -15,8 +15,8 @@ import constants
 def access_schedule(username, password):
     try:
         # You may choose to use Firefox or Chrome below, instead.
-        driver = webdriver.Edge()
-        #driver = webdriver.Firefox()
+        #driver = webdriver.Edge()
+        driver = webdriver.Firefox()
         #driver = webdriver.Chrome()
 
         #Request webpage containing schedule
@@ -33,19 +33,21 @@ def access_schedule(username, password):
         WebDriverWait(driver, 10).until(EC.element_to_be_clickable(constants.PASSWORD_FIELD)).send_keys(password)
         WebDriverWait(driver, 10).until(EC.element_to_be_clickable(constants.NEXT_BUTTON)).click()
         WebDriverWait(driver, 10).until(EC.element_to_be_clickable(constants.AUTH_BUTTON)).click()
-
-
+        
+        '''
         # Waits for elements to be present on page
         while True:
             if len(driver.find_elements(By.CSS_SELECTOR, '#futureWeekButton')) > 0:
                 break
         
         time.sleep(2)
-        
+        '''
+
+        next_week_button = WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.CSS_SELECTOR, '#futureWeekButton')))
         # Click button to display latest week in schedule table    
-        driver.find_element(By.CSS_SELECTOR, '#futureWeekButton').click()
+        next_week_button.click()
         time.sleep(2)
-        driver.find_element(By.CSS_SELECTOR, '#futureWeekButton').click()
+        next_week_button.click()
         time.sleep(3)
 
         schedule_page = driver.page_source
@@ -56,3 +58,10 @@ def access_schedule(username, password):
 
     except Exception as e:
         print("AN ERROR OCCURRED.")
+'''
+def main():
+    access_schedule('   ', '   ')
+
+if __name__ == '__main__':
+    main()
+'''

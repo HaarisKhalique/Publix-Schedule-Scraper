@@ -53,45 +53,54 @@ def process_html(html_content):
     
     # arrays to store data from HTML
     dates, shifts, meals, workdays = [], [], [], []
+    
 
     # create soup from html
     soup = BeautifulSoup(html_content, 'html.parser')
-        
-    # extract current year using schedule week string and regex
-    schedule_week = soup.find('div', class_='text-center week-header pt-1').text.strip()
-    match = re.search(r'\b\d{4}\b', schedule_week)
-    if match:
-        current_year = match.group()
-        
-    # retrieve scheduled shift dates
-    dates_td = soup.find_all('td', class_='col-md-2 pb-4 pt-3')
-    for td in dates_td:
-        td_sibling = td.find_next_sibling('td', class_='col-md-12')
-        if td_sibling:
-            continue
-        else:
-            date = td.find('span').find_next_sibling('span').text.strip().replace('.','')
-            dates.append(f'{date}/{current_year}')
-             
-    # retrieve scheduled shift by finding div element
-    shift_information = soup.find_all('div', class_='collapse col-xs-12 hidden-md hidden-lg')
-    for div in shift_information:
-        shift_time = div.find('div', class_='row').find('div', class_='col-xs-6 shift p-0')
-        if shift_time:
-            shifts.append(shift_time.text)
-        else:
-            continue
-            
-        # retrieve meal times, if any
-        meal_div = div.find('div', class_='col-xs-6 shift', string='Meal')
-        if meal_div: # check if a div for Meal exists, then check for sibling containing meal time
-            meal_time = meal_div.find_next_sibling('div', class_='col-xs-6 shift p-0')    
-            if meal_time: # append to meals array
-                meals.append(meal_time.text.strip())
-            
-        else: # if no meal is scheduled
-                meals.append(None)
 
+    #Locate schedule element
+    schedule = soup.find('div', id = 'redesignedSchedule')
+
+    #Obtain week start date to extract month, day, year
+    week_start_date = schedule.find_next('span').text.strip()
+
+    current_month = 0
+    current_day = 0
+    current_year = 0
+    
+    pattern = r"(\d{1,2})/(\d{1,2})/(\d{4})" # mm/dd/yyyy pattern
+    date_format = re.match(pattern, week_start_date)
+    if date_format:
+        current_month = date_format.group(1)
+        current_day = date_format.group(2)
+        current_year = date_format.group(3)
+    
+
+    #Obtain shift data for dates scheduled to work. Exclude elements where employee is not scheduled.
+    days = schedule.find_all('div', class_= 'pb-3') 
+    scheduled_days = [day for day in days if  day.find('div', class_= 'calendar-day-of-month-number')]
+
+    for day in scheduled_days:
+        # Find days employee is schedule
+        day_number = day.find('div', class_= 'calendar-day-of-month-number').text.strip()
+        if (day_number < current_day):
+            current_month += 1
+            if(current_month > 12):
+                current_year +=1
+        dates.append(f'{current_month}/{day_number}/{current_year}')
+
+        # Find shift times
+        shift = day.find('div', class_= 'col-xs-10')
+        shift_time = shift.find_next('div', text= lambda x: x and '-' in x)
+        shifts.append(shift_time.text.strip())
+
+        # Find meal times
+        meal = shift.find_next('div', class_='pt-3')
+        if(meal):
+            meal_div = meal.find('div', class_= 'pb-3')
+            meal_time = meal_div.find('div', text=lambda x: x and '-' in x)
+            meals.append(meal_time.text.strip())
+   
     # create WorkDay objects, store in workdays
     for i in range(0, len(dates)):
         shift_start, shift_end = format_time(dates[i], shifts[i])

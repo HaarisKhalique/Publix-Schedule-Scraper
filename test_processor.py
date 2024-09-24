@@ -53,7 +53,6 @@ def process_html(html_content):
     
     # arrays to store data from HTML
     dates, shifts, meals, workdays = [], [], [], []
-
     
 
     # create soup from html
@@ -105,45 +104,7 @@ def process_html(html_content):
             meal_div = meal.find('div', class_= 'pb-3')
             meal_time = meal_div.find('div', text=lambda x: x and '-' in x)
             meals.append(meal_time.text.strip())
-
-
-
-    print(dates)
-    print(shifts)
-    print(meals)
-        
-    
-    
-    '''    
-    # retrieve scheduled shift dates
-    dates_td = soup.find_all('td', class_='col-md-2 pb-4 pt-3')
-    for td in dates_td:
-        td_sibling = td.find_next_sibling('td', class_='col-md-12')
-        if td_sibling:
-            continue
-        else:
-            date = td.find('span').find_next_sibling('span').text.strip().replace('.','')
-            dates.append(f'{date}/{current_year}')
-             
-    # retrieve scheduled shift by finding div element
-    shift_information = soup.find_all('div', class_='collapse col-xs-12 hidden-md hidden-lg')
-    for div in shift_information:
-        shift_time = div.find('div', class_='row').find('div', class_='col-xs-6 shift p-0')
-        if shift_time:
-            shifts.append(shift_time.text)
-        else:
-            continue
-            
-        # retrieve meal times, if any
-        meal_div = div.find('div', class_='col-xs-6 shift', string='Meal')
-        if meal_div: # check if a div for Meal exists, then check for sibling containing meal time
-            meal_time = meal_div.find_next_sibling('div', class_='col-xs-6 shift p-0')    
-            if meal_time: # append to meals array
-                meals.append(meal_time.text.strip())
-            
-        else: # if no meal is scheduled
-                meals.append(None)
-    
+   
     # create WorkDay objects, store in workdays
     for i in range(0, len(dates)):
         shift_start, shift_end = format_time(dates[i], shifts[i])
@@ -151,11 +112,12 @@ def process_html(html_content):
         workdays.append(WorkDay(shift_start,shift_end,meal_start,meal_end))
 
     return workdays
-    '''
+
 def main():
     file = open('schedule.html', 'r')
     process_html(file)
-    #for s in shifts:
+    #test = process_html(file)
+    #for s in test:
         #print(s.start + " " + s.end + " " + s.meal_start + " " + s.meal_end)
 
 if __name__ == '__main__':
