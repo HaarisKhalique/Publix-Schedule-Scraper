@@ -71,9 +71,10 @@ def process_html(html_content):
     pattern = r"(\d{1,2})/(\d{1,2})/(\d{4})" # mm/dd/yyyy pattern
     date_format = re.match(pattern, week_start_date)
     if date_format:
-        current_month = date_format.group(1)
-        current_day = date_format.group(2)
-        current_year = date_format.group(3)
+        current_month = (int)(date_format.group(1))
+        current_day = (int)(date_format.group(2))
+        current_year = (int)(date_format.group(3))
+    
     
 
     #Obtain shift data for dates scheduled to work. Exclude elements where employee is not scheduled.
@@ -82,10 +83,12 @@ def process_html(html_content):
 
     for day in scheduled_days:
         # Find days employee is schedule
-        day_number = day.find('div', class_= 'calendar-day-of-month-number').text.strip()
+        day_number = (int)(day.find('div', class_= 'calendar-day-of-month-number').text.strip())
         if (day_number < current_day):
+            current_day = day_number
             current_month += 1
             if(current_month > 12):
+                current_month = 1
                 current_year +=1
         dates.append(f'{current_month}/{day_number}/{current_year}')
 
@@ -100,6 +103,9 @@ def process_html(html_content):
             meal_div = meal.find('div', class_= 'pb-3')
             meal_time = meal_div.find('div', text=lambda x: x and '-' in x)
             meals.append(meal_time.text.strip())
+
+        else:
+            meals.append(None)
    
     # create WorkDay objects, store in workdays
     for i in range(0, len(dates)):
